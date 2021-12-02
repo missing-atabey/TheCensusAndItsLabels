@@ -15,13 +15,25 @@ Reference for get_vals() function:
 
 
 
-#All population lines
-#util.plot_all_lines(util.data,util.years, 1e6)
+#----ALL POPULATION LINE GRAPHS----
+
+"""
+util.plot_all_lines(util.data,util.years, 1e6)
+plt.legend()
+plt.title("Total US Population Change In The Last 100 Years")
+plt.ylabel("Population Per Million")
+plt.xlabel("Year")
+plt.savefig("Population Lines/General.png")
+plt.cla()
+"""
 
 #Scatterplot: Asian (x-axis) and H/PI (y-axis)
 #util.ax.scatter([x/1000000 for x in util.get_vals(1)], [x/1000000 for x in util.get_vals(7)])
 
-#Graph points for a set of data and perform a linear regression on it
+
+#----GRAPH POINTS FOR A SET OF DATA AND PERFORM A LINEAR REGRESSION ON IT----
+
+"""
 for i in range(len(util.data)):
     util.ax.scatter(util.years, [x/1000000 for x in util.get_vals(i)])
     util.ax.plot(util.years,util.linear_regression(util.years, [x/1000000 for x in util.get_vals(i)]))
@@ -32,10 +44,7 @@ for i in range(len(util.data)):
     plt.ylabel("Population Per Million")
     plt.savefig("Linear Regressions/" + util.data[i]["Race/Ethnicity"] + ".png")
     plt.cla()
-
-
-#Show legend
-#plt.legend()
+"""
 
 #Change number formatting from Sci. Not. to Standard
 #plt.ticklabel_format(axis="y", style="plain")
