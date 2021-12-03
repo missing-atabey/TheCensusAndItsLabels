@@ -41,7 +41,7 @@ years.reverse()
 """
 F U N C T I O N S
 """
-#Extract values in float form (return -1 for blank values)
+#----Extract values in float form (return -1 for blank values)----
 def get_vals(row_number):
   input = data[row_number]
   output = []
@@ -66,7 +66,7 @@ def get_vals(row_number):
   return output
 
 
-#Plot all line graphs for data
+#----Plot all line graphs for data----
 def plot_all_lines():
   for i in range(len(data)):
     ax.plot(years, [x/1000000 for x in get_vals(i)], label=data[i]["Race/Ethnicity"])
@@ -75,11 +75,11 @@ def plot_all_lines():
   plt.title("Total US Population Change In The Last 100 Years")
   plt.ylabel("Population Per Million")
   plt.xlabel("Year")
-  plt.savefig("Misc Graphs/General.png")
+  plt.savefig("Graphs/Misc Graphs/General.png")
   plt.cla()
     
     
-#Returns y-values for a best fir line according to a set of data
+#----Returns y-values for a best fir line according to a set of data----
 def linear_regression(x,y):
     x = np.array(x)
     y = np.array(y)
@@ -91,7 +91,7 @@ def linear_regression(x,y):
     
     return [poly(i) for i in x]
 
-#Scatter plot generation
+#----Scatter plot generation----
 def scatter():
   for j in range(len(data)):
     for i in range(len(data)):
@@ -102,7 +102,7 @@ def scatter():
             plt.title(data[j]["Race/Ethnicity"] + " to " + data[i]["Race/Ethnicity"] + " population")
             plt.xlabel( data[i]["Race/Ethnicity"] + " Population Per Million")
             plt.ylabel( data[j]["Race/Ethnicity"] + " Population Per Million")
-            plt.savefig("Scatterplots/" + data[j]["Race/Ethnicity"] + "/to " + data[i]["Race/Ethnicity"] +".png")
+            plt.savefig("Graphs/Scatterplots/" + data[j]["Race/Ethnicity"] + "/to " + data[i]["Race/Ethnicity"] +".png")
             plt.cla()
 
 #----GRAPH POINTS FOR A SET OF DATA AND PERFORM A LINEAR REGRESSION ON IT----
@@ -115,5 +115,5 @@ def regressions():
       plt.title(data[i]["Race/Ethnicity"] + " Population Over Time")
       plt.xlabel("Year")
       plt.ylabel("Population Per Million")
-      plt.savefig("Linear Regressions/" + data[i]["Race/Ethnicity"] + ".png")
+      plt.savefig("Graphs/Linear Regressions/" + data[i]["Race/Ethnicity"] + ".png")
       plt.cla()
