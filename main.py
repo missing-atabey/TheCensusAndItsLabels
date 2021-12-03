@@ -27,9 +27,6 @@ plt.savefig("Population Lines/General.png")
 plt.cla()
 """
 
-#Scatterplot: Asian (x-axis) and H/PI (y-axis)
-#util.ax.scatter([x/1000000 for x in util.get_vals(1)], [x/1000000 for x in util.get_vals(7)])
-
 
 #----GRAPH POINTS FOR A SET OF DATA AND PERFORM A LINEAR REGRESSION ON IT----
 
@@ -46,16 +43,14 @@ for i in range(len(util.data)):
     plt.cla()
 """
 
-#Change number formatting from Sci. Not. to Standard
-#plt.ticklabel_format(axis="y", style="plain")
-
-#Set Title and Labels
-#plt.title("White to Hispanic Population Change")
-#plt.ylabel("Hispanic")
-#plt.xlabel("White")
-
-#Save figure as file
-#plt.savefig("Total_Population.png")
-
-#Show graph
-#plt.show()
+#----Scatterplot----
+"""
+for j in range(len(util.data)):
+    for i in range(len(util.data)):
+        util.ax.scatter([x/1000000 for x in util.get_vals(j)], [x/1000000 for x in util.get_vals(i)])
+        plt.title(util.data[j]["Race/Ethnicity"] + " to " + util.data[i]["Race/Ethnicity"] + " population")
+        plt.xlabel( util.data[i]["Race/Ethnicity"] + " Population Per Million")
+        plt.ylabel( util.data[j]["Race/Ethnicity"] + " Population Per Million")
+        plt.savefig("Scatterplots/" + util.data[j]["Race/Ethnicity"] + "/to " + util.data[i]["Race/Ethnicity"] +".png")
+        plt.cla()
+"""
