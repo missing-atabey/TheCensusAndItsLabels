@@ -3,6 +3,19 @@ import csv
 import numpy as np
 
 """
+Reference for get_vals() function:
+0 = Total
+1 = White
+2 = Black
+3 = Indigenous American / Alaska Native
+4 = Asian
+5 = Hawaiian or Pacific Islander
+6 = Other
+7 = Hispanic
+"""
+
+
+"""
 D A T A   I M P O R T
 """
 with open('CensusData.csv') as file:
@@ -53,10 +66,17 @@ def get_vals(row_number):
   return output
 
 
-#Plot all lines for data
-def plot_all_lines(inp, years, amt=1):
-  for i in range(len(inp)):
-    ax.plot(years, [x/amt for x in get_vals(i)], label=inp[i]["Race/Ethnicity"])
+#Plot all line graphs for data
+def plot_all_lines():
+  for i in range(len(data)):
+    ax.plot(years, [x/1000000 for x in get_vals(i)], label=data[i]["Race/Ethnicity"])
+
+  plt.legend()
+  plt.title("Total US Population Change In The Last 100 Years")
+  plt.ylabel("Population Per Million")
+  plt.xlabel("Year")
+  plt.savefig("Misc Graphs/General.png")
+  plt.cla()
     
     
 #Returns y-values for a best fir line according to a set of data
@@ -70,3 +90,30 @@ def linear_regression(x,y):
     
     
     return [poly(i) for i in x]
+
+#Scatter plot generation
+def scatter():
+  for j in range(len(data)):
+    for i in range(len(data)):
+        if i == 0:
+            continue
+        else:
+            ax.scatter([x/1000000 for x in get_vals(j)], [x/1000000 for x in get_vals(i)])
+            plt.title(data[j]["Race/Ethnicity"] + " to " + data[i]["Race/Ethnicity"] + " population")
+            plt.xlabel( data[i]["Race/Ethnicity"] + " Population Per Million")
+            plt.ylabel( data[j]["Race/Ethnicity"] + " Population Per Million")
+            plt.savefig("Scatterplots/" + data[j]["Race/Ethnicity"] + "/to " + data[i]["Race/Ethnicity"] +".png")
+            plt.cla()
+
+#----GRAPH POINTS FOR A SET OF DATA AND PERFORM A LINEAR REGRESSION ON IT----
+def regressions():
+    for i in range(len(data)):
+      ax.scatter(years, [x/1000000 for x in get_vals(i)])
+      ax.plot(years,linear_regression(years, [x/1000000 for x in get_vals(i)]))
+
+      plt.ticklabel_format(axis="y", style="plain")
+      plt.title(data[i]["Race/Ethnicity"] + " Population Over Time")
+      plt.xlabel("Year")
+      plt.ylabel("Population Per Million")
+      plt.savefig("Linear Regressions/" + data[i]["Race/Ethnicity"] + ".png")
+      plt.cla()
