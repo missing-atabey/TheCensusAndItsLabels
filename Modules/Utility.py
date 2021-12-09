@@ -146,8 +146,10 @@ def percentages(white=True):
     X = np.arange(len(p_row))
     plt.bar(X + i * gap, p_row, width = gap, align="center", label=data[i+add]["Race/Ethnicity"])
 
-  # Add xticks on the middle of the group bars
-  plt.xlabel('group', fontweight='bold')
+  #Y label
+  plt.ylabel("Percent")
+  # Add xticks on the middle of the percent bars
+  plt.xlabel('Year')
   plt.xticks([r + gap for r in range(len(percents[0]))], years)
     
   
