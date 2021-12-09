@@ -8,3 +8,6 @@ import Modules.Utility as util
 
 #----Scatterplot----
 #util.scatter()
+
+#----Percentage Bar Charts----
+util.percentages(False)
