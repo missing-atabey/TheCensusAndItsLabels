@@ -117,3 +117,45 @@ def regressions():
       plt.ylabel("Population Per Million")
       plt.savefig("Graphs/Linear Regressions/" + data[i]["Race/Ethnicity"] + ".png")
       plt.cla()
+
+#----Graph demographic percentages over time----
+def percentages(white=True):
+
+  percents = []
+  total = get_vals(0)
+
+  if white == True:
+    add = 1
+    for i in range(len(data)):
+      if i == 0:
+        continue
+      else:
+        percents += [[round((get_vals(i)[x]/total[x])*100, 2) for x in range(len(get_vals(i)))]]
+  else:
+    add = 2
+    for i in range(len(data)):
+      if i == 0 or i == 1:
+        continue
+      else:
+        percents += [[round((get_vals(i)[x]/total[x])*100, 2) for x in range(len(get_vals(i)))]]
+
+    
+  # Make the plot
+  gap = .8 / len(percents)
+  for i, p_row in enumerate(percents):
+    X = np.arange(len(p_row))
+    plt.bar(X + i * gap, p_row, width = gap, align="center", label=data[i+add]["Race/Ethnicity"])
+
+  # Add xticks on the middle of the group bars
+  plt.xlabel('group', fontweight='bold')
+  plt.xticks([r + gap for r in range(len(percents[0]))], years)
+    
+  
+  plt.title("Population Percentages Over Time")
+  plt.legend()
+  if white == True:
+    plt.savefig("Graphs/Misc Graphs/percents.png")
+  else:
+    plt.savefig("Graphs/Misc Graphs/percents_no_white.png")
+  plt.cla()
+
